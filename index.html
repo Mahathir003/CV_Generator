@@ -3,571 +3,768 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Interactive Premium CV & Biodata Builder (A4 Calibrated)</title>
+    <!-- =========================================================================
+         [DOCUMENT HEADER & EXTERNAL LIBRARIES]
+         ========================================================================= -->
+    <title>Premium Calibrated Document Builder (A4 Print-Ready)</title>
 
-    <!-- Google Fonts for Montserrat & fallbacks -->
+    <!-- Google Fonts: Montserrat (Modern Clean Sans) & Playfair Display (Formal elegant Serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
       rel="stylesheet"
     />
 
-    <!-- FontAwesome Icons for Configurator Panels -->
+    <!-- FontAwesome Library: Visual dashboard icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
 
-    <!-- html-to-image for high-fidelity SVG/PNG rendering -->
+    <!-- html-to-image library: Captures DOM structures into high-fidelity image layers -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.13/html-to-image.min.js"></script>
 
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS Engine: Fast visual component styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css">
 
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <!-- LEFT PANEL: UNIFIED SCROLLING CONFIGURATOR -->
+    <!-- =========================================================================
+         [LEFT EDIT PANEL: WORKSPACE CONFIGURATION SIDEBAR]
+         ========================================================================= -->
     <div class="sidebar-panel">
-      <div class="panel-header">
-        <h1>Interactive Engine Builder</h1>
-        <p>Customize A4 layout, fonts & export instantly</p>
+      <!-- Panel Header Information block -->
+      <div
+        class="panel-header p-6 bg-slate-900 border-b border-slate-800 shrink-0"
+      >
+        <h1 class="text-xl font-bold tracking-tight text-white">
+          Interactive Design Builder
+        </h1>
+        <p class="text-xs text-slate-400 mt-0.5">
+          Calibrated A4 alignment engine for pixel-perfect exports
+        </p>
       </div>
 
-      <div class="controls-container">
-        <!-- Professional vs Marital Segment Select -->
-        <div class="control-group">
-          <label
-            ><i class="fa-solid fa-compass"></i> Layout Mode / Purpose</label
-          >
-          <div class="grid grid-cols-2 gap-2 bg-slate-900 p-1 rounded-lg">
-            <button
-              id="purpose-prof"
-              class="py-1.5 px-3 rounded-md text-xs font-semibold purpose-btn-active"
-              onclick="switchPurpose('professional')"
+      <!-- Scrollable forms area containing user data input modules -->
+      <div class="sidebar-scroll-content flex-1">
+        <!-- Controls Container: Controls, font selector, templates selectors, and palettes -->
+        <div class="controls-container">
+          <!-- Control Group 1: Purpose Toggle (Professional vs Marriage) -->
+          <div class="control-group">
+            <label
+              ><i class="fa-solid fa-compass"></i> Layout Mode / Purpose</label
             >
-              Professional CV
-            </button>
-            <button
-              id="purpose-marital"
-              class="py-1.5 px-3 rounded-md text-xs font-semibold text-slate-400"
-              onclick="switchPurpose('marital')"
-            >
-              Marriage Biodata
-            </button>
-          </div>
-        </div>
-
-        <!-- Active Resume Template Grid (Non-Dropdown) -->
-        <div class="control-group">
-          <label
-            ><i class="fa-solid fa-layer-group"></i> Active Resume
-            Template</label
-          >
-          <div class="template-selector-grid" id="templateSelectorContainer">
-            <button
-              class="template-card-btn active"
-              onclick="selectTemplate('1')"
-              id="tplBtn-1"
-            >
-              <span class="template-num">Template 1</span>
-              <span class="template-desc">Navy & Gold Contrast</span>
-            </button>
-            <button
-              class="template-card-btn"
-              onclick="selectTemplate('2')"
-              id="tplBtn-2"
-            >
-              <span class="template-num">Template 2</span>
-              <span class="template-desc">Chocolate Ribbon</span>
-            </button>
-            <button
-              class="template-card-btn"
-              onclick="selectTemplate('3')"
-              id="tplBtn-3"
-            >
-              <span class="template-num">Template 3</span>
-              <span class="template-desc">Header Frame Box</span>
-            </button>
-            <button
-              class="template-card-btn"
-              onclick="selectTemplate('4')"
-              id="tplBtn-4"
-            >
-              <span class="template-num">Template 4</span>
-              <span class="template-desc">Asymmetric Split</span>
-            </button>
-            <button
-              class="template-card-btn"
-              onclick="selectTemplate('5')"
-              id="tplBtn-5"
-            >
-              <span class="template-num">Template 5</span>
-              <span class="template-desc">Rotated Diamond</span>
-            </button>
-            <button
-              class="template-card-btn"
-              onclick="selectTemplate('6')"
-              id="tplBtn-6"
-            >
-              <span class="template-num">Template 6</span>
-              <span class="template-desc">Teal Wave Curve</span>
-            </button>
-            <button
-              class="template-card-btn"
-              onclick="selectTemplate('7')"
-              id="tplBtn-7"
-            >
-              <span class="template-num">Template 7</span>
-              <span class="template-desc">Terracotta Pill</span>
-            </button>
-            <button
-              class="template-card-btn"
-              onclick="selectTemplate('8')"
-              id="tplBtn-8"
-            >
-              <span class="template-num">Template 8</span>
-              <span class="template-desc">Dot-Grid Corner</span>
-            </button>
-            <button
-              class="template-card-btn"
-              onclick="selectTemplate('9')"
-              id="tplBtn-9"
-            >
-              <span class="template-num">Template 9</span>
-              <span class="template-desc">Metro Layout</span>
-            </button>
-            <button
-              class="template-card-btn"
-              onclick="selectTemplate('10')"
-              id="tplBtn-10"
-            >
-              <span class="template-num">Template 10</span>
-              <span class="template-desc">B&W Photographer</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Font selection featuring exactly the 6 requested fonts -->
-        <div class="control-group">
-          <label><i class="fa-solid fa-font"></i> Typography Class</label>
-          <select id="activeFont" onchange="updateCanvasFont()">
-            <option value="'Montserrat', sans-serif">
-              Montserrat (Premium Geometric Sans)
-            </option>
-            <option value="Calibri, Candara, sans-serif">
-              Calibri (Modern Soft Geometric)
-            </option>
-            <option value="'Garamond', 'Georgia', serif">
-              Garamond (Elite Elegant Book Serif)
-            </option>
-            <option value="Candara, Calibri, sans-serif">
-              Candara (Expressive Playful Sans)
-            </option>
-            <option value="Cambria, Georgia, serif">
-              Cambria (Stately Academic Serif)
-            </option>
-            <option value="'Aptos', 'Inter', sans-serif">
-              Aptos (Precise Swiss Editorial)
-            </option>
-          </select>
-        </div>
-
-        <!-- Custom Brand Colors -->
-        <div class="control-group">
-          <label><i class="fa-solid fa-palette"></i> Custom Brand Colors</label>
-          <div class="color-pickers-row">
-            <div class="color-input-container">
-              <input
-                type="color"
-                id="primaryColor"
-                value="#0f172a"
-                oninput="updateCanvasColors(true)"
-              />
-              <span>Primary</span>
-            </div>
-            <div class="color-input-container">
-              <input
-                type="color"
-                id="secondaryColor"
-                value="#eab308"
-                oninput="updateCanvasColors(true)"
-              />
-              <span>Secondary</span>
+            <div class="grid grid-cols-2 gap-2 bg-slate-900 p-1 rounded-lg">
+              <button
+                id="purpose-prof"
+                class="py-1.5 px-3 rounded-md text-xs font-semibold bg-sky-600 text-white shadow"
+                onclick="switchPurpose('professional')"
+              >
+                Professional CV
+              </button>
+              <button
+                id="purpose-marital"
+                class="py-1.5 px-3 rounded-md text-xs font-semibold text-slate-400"
+                onclick="switchPurpose('marital')"
+              >
+                Marriage Biodata
+              </button>
             </div>
           </div>
+
+          <!-- Control Group 2: Font selector dropdown menu -->
+          <div class="control-group">
+            <label
+              ><i class="fa-solid fa-font"></i> Typography / Font
+              Selection</label
+            >
+            <span class="input-guide-label"
+              >Select the active typeface layout style for your print page</span
+            >
+            <select
+              id="fontSelector"
+              onchange="updateFont()"
+              class="bg-slate-900 border border-slate-700 rounded px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-sky-500 w-full"
+            >
+              <option value="Calibri" selected>
+                Calibri (Modern Balanced Sans)
+              </option>
+              <option value="Arial">Arial (Clean Editorial Sans)</option>
+              <option value="Helvetica">
+                Helvetica (Classic Grotesque Sans)
+              </option>
+              <option value="Garamond">Garamond (Elegant Book Serif)</option>
+              <option value="Cambria">Cambria (Formal Editorial Serif)</option>
+            </select>
+          </div>
+
+          <!-- Control Group 3: Design non-dropdown buttons selector grid -->
+          <div class="control-group">
+            <label
+              ><i class="fa-solid fa-layer-group"></i> Active Template
+              Style</label
+            >
+            <div class="template-selector-grid">
+              <button
+                class="template-card-btn"
+                id="tplBtn-1"
+                onclick="selectTemplate('1')"
+              >
+                <span class="template-num">Template 1</span>
+                <span class="template-desc">Navy & Gold Contrast</span>
+              </button>
+              <button
+                class="template-card-btn"
+                id="tplBtn-2"
+                onclick="selectTemplate('2')"
+              >
+                <span class="template-num">Template 2</span>
+                <span class="template-desc">Chocolate Ribbon (Capsule)</span>
+              </button>
+              <button
+                class="template-card-btn"
+                id="tplBtn-3"
+                onclick="selectTemplate('3')"
+              >
+                <span class="template-num">Template 3</span>
+                <span class="template-desc">Donna Stroupe Layout</span>
+              </button>
+              <button
+                class="template-card-btn active"
+                id="tplBtn-4"
+                onclick="selectTemplate('4')"
+              >
+                <span class="template-num">Template 4</span>
+                <span class="template-desc">Infographic Slate (Adam)</span>
+              </button>
+              <button
+                class="template-card-btn"
+                id="tplBtn-5"
+                onclick="selectTemplate('5')"
+              >
+                <span class="template-num">Template 5</span>
+                <span class="template-desc">Rotated Diamond</span>
+              </button>
+              <button
+                class="template-card-btn"
+                id="tplBtn-6"
+                onclick="selectTemplate('6')"
+              >
+                <span class="template-num">Template 6</span>
+                <span class="template-desc">Teal Wave Curve</span>
+              </button>
+              <button
+                class="template-card-btn"
+                id="tplBtn-7"
+                onclick="selectTemplate('7')"
+              >
+                <span class="template-num">Template 7</span>
+                <span class="template-desc">Terracotta Pill</span>
+              </button>
+              <button
+                class="template-card-btn"
+                id="tplBtn-8"
+                onclick="selectTemplate('8')"
+              >
+                <span class="template-num">Template 8</span>
+                <span class="template-desc">Dot-Grid Corner</span>
+              </button>
+              <button
+                class="template-card-btn"
+                id="tplBtn-9"
+                onclick="selectTemplate('9')"
+              >
+                <span class="template-num">Template 9</span>
+                <span class="template-desc">Metro Layout (Bespoke Dark)</span>
+              </button>
+              <button
+                class="template-card-btn"
+                id="tplBtn-10"
+                onclick="selectTemplate('10')"
+              >
+                <span class="template-num">Template 10</span>
+                <span class="template-desc">B&W Photographer</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Control Group 4: Customized Brand Color Palettes -->
+          <div class="control-group">
+            <label
+              ><i class="fa-solid fa-palette"></i> Custom Brand Colors</label
+            >
+            <div class="color-pickers-row">
+              <div class="color-input-container">
+                <input
+                  type="color"
+                  id="primaryColor"
+                  value="#0b192c"
+                  oninput="updateColors()"
+                />
+                <span class="text-xs font-medium text-slate-300">Primary</span>
+              </div>
+              <div class="color-input-container">
+                <input
+                  type="color"
+                  id="secondaryColor"
+                  value="#eab308"
+                  oninput="updateColors()"
+                />
+                <span class="text-xs font-medium text-slate-300"
+                  >Secondary</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Control Group 5: Profile picture uploader channel (Only local browser uploads accepted) -->
+          <div class="control-group">
+            <label><i class="fa-solid fa-camera"></i> Profile Photo</label>
+            <div class="form-grid">
+              <div>
+                <span class="input-guide-label"
+                  >Select and upload a portrait picture from your device</span
+                >
+                <button
+                  type="button"
+                  onclick="document.getElementById('file-upload-input').click()"
+                  class="bg-sky-600 hover:bg-sky-500 border border-sky-700 rounded px-3 py-2 text-xs text-white font-bold flex items-center justify-center gap-1.5 cursor-pointer w-full"
+                >
+                  <i class="fa-solid fa-cloud-arrow-up"></i> Upload Photo
+                </button>
+                <input
+                  type="file"
+                  id="file-upload-input"
+                  accept="image/*"
+                  class="hidden"
+                  onchange="handleImageUpload(event)"
+                />
+                <!-- Hidden compatible state element holding image Base64 data -->
+                <input
+                  type="hidden"
+                  id="input-photo"
+                  value="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&h=256&fit=crop"
+                />
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="control-group">
-          <label><i class="fa-solid fa-camera"></i> Profile Picture</label>
-          <input
-            type="file"
-            id="imageInput"
-            accept="image/*"
-            onchange="handleImageUpload()"
-          />
-        </div>
+        <!-- Scrollable user info configuration fields -->
+        <div class="form-scroll-area">
+          <!-- Information Field: Primary Identity (Name, title, summary) -->
+          <div class="form-section">
+            <h3><i class="fa-solid fa-id-card"></i> Primary Identity</h3>
+            <div class="form-grid">
+              <div>
+                <span class="input-guide-label"
+                  >Your Full Name (First & Last name)</span
+                >
+                <input
+                  type="text"
+                  id="f-name"
+                  placeholder="Full Name"
+                  value="Adam Fletcher"
+                  oninput="renderLivePreview()"
+                />
+              </div>
+              <div>
+                <span class="input-guide-label"
+                  >Professional Role or Sect/Clan Lineage subtitle</span
+                >
+                <input
+                  type="text"
+                  id="f-subtitle"
+                  placeholder="Professional Title / Profile Subtitle"
+                  value="Graphics Designer"
+                  oninput="renderLivePreview()"
+                />
+              </div>
+              <div>
+                <span class="input-guide-label"
+                  >Introduction Summary / Bio statement (A4 fit: 3 lines
+                  max)</span
+                >
+                <textarea
+                  id="f-about"
+                  placeholder="Personal Summary / Intro statement"
+                  rows="3"
+                  oninput="renderLivePreview()"
+                >
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra in lorem ut laoreet. Donec hendrerit libero eget est tempor, quis tempus arcu elementum.</textarea
+                >
+              </div>
+            </div>
+          </div>
 
-        <div class="grid grid-cols-1 gap-2 mt-1">
-          <button class="btn-primary" onclick="exportHighResPNG()">
-            <i class="fa-solid fa-download"></i> Download PNG (Super Sharp)
-          </button>
-          <button
-            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-3 rounded-lg text-sm transition-all"
-            onclick="exportPDFDirect()"
-          >
-            <i class="fa-solid fa-print"></i> Print / Save PDF (Vector Clear)
-          </button>
+          <!-- Information Field: Contact Channels (Phone, email, location, website) -->
+          <div class="form-section">
+            <h3><i class="fa-solid fa-envelope"></i> Contact Channels</h3>
+            <div class="form-grid">
+              <div>
+                <span class="input-guide-label"
+                  >Active Contact Mobile/Phone Number</span
+                >
+                <input
+                  type="text"
+                  id="f-phone"
+                  placeholder="Phone Number"
+                  value="+123-456-7890"
+                  oninput="renderLivePreview()"
+                />
+              </div>
+              <div>
+                <span class="input-guide-label"
+                  >Professional/Primary Email Address</span
+                >
+                <input
+                  type="text"
+                  id="f-email"
+                  placeholder="Email Address"
+                  value="hello@reallygreatsite.com"
+                  oninput="renderLivePreview()"
+                />
+              </div>
+              <div>
+                <span class="input-guide-label"
+                  >Current Residential Location (City, State/Country)</span
+                >
+                <input
+                  type="text"
+                  id="f-loc"
+                  placeholder="Location"
+                  value="123 Anywhere St., Any City, ST 12345"
+                  oninput="renderLivePreview()"
+                />
+              </div>
+              <div>
+                <span class="input-guide-label"
+                  >Personal Portfolio URL / Social Handle link</span
+                >
+                <input
+                  type="text"
+                  id="f-web"
+                  placeholder="Website URL"
+                  value="www.reallygreatsite.com"
+                  oninput="renderLivePreview()"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- =========================================================================
+               [SUB-SECTION: DYNAMIC FIELD COMPILER FOR PROFESSIONAL CV ONLY]
+               ========================================================================= -->
+          <div id="form-prof-fields" class="space-y-4">
+            <!-- Skill Matrix Generator -->
+            <div class="form-section">
+              <h3><i class="fa-solid fa-tags"></i> Core Skills</h3>
+              <p class="text-[10px] text-sky-400 mb-2">
+                Configure skills (Limit: Max 6)
+              </p>
+              <div class="space-y-2 mb-3" id="cv-skills-container">
+                <!-- Dynamic entries loaded via JS here -->
+              </div>
+              <div
+                class="form-grid bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"
+              >
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="col-span-2">
+                    <span class="input-guide-label"
+                      >Skill/Tool/Expertise Name</span
+                    >
+                    <input
+                      type="text"
+                      id="skill-name"
+                      placeholder="Skill Name"
+                    />
+                  </div>
+                  <div>
+                    <span class="input-guide-label">Competence (0-100)%</span>
+                    <input
+                      type="number"
+                      id="skill-val"
+                      placeholder="Level"
+                      min="1"
+                      max="100"
+                    />
+                  </div>
+                </div>
+                <button
+                  class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-1.5 px-3 rounded text-xs transition mt-2 cursor-pointer"
+                  onclick="addSkill()"
+                >
+                  <i class="fa-solid fa-plus"></i> Add Skill Card
+                </button>
+              </div>
+            </div>
+
+            <!-- Spoken Languages Registry -->
+            <div class="form-section">
+              <h3><i class="fa-solid fa-language"></i> Spoken Languages</h3>
+              <p class="text-[10px] text-sky-400 mb-2">
+                Configure languages (Limit: Max 4)
+              </p>
+              <div class="space-y-2 mb-3" id="cv-languages-container">
+                <!-- Dynamic entries loaded via JS here -->
+              </div>
+              <div
+                class="form-grid bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"
+              >
+                <div>
+                  <span class="input-guide-label"
+                    >Spoken Language and Proficiency (e.g., English)</span
+                  >
+                  <input
+                    type="text"
+                    id="lang-name"
+                    placeholder="Language (e.g. English)"
+                  />
+                </div>
+                <button
+                  class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-1.5 px-3 rounded text-xs transition cursor-pointer"
+                  onclick="addLanguage()"
+                >
+                  <i class="fa-solid fa-plus"></i> Add Language
+                </button>
+              </div>
+            </div>
+
+            <!-- Experience Chronicles timeline -->
+            <div class="form-section">
+              <h3><i class="fa-solid fa-briefcase"></i> Experience History</h3>
+              <p class="text-[10px] text-sky-400 mb-2">
+                Configure jobs/milestones (Limit: Max 3)
+              </p>
+              <div class="space-y-2 mb-3" id="cv-experience-container">
+                <!-- Dynamic entries loaded via JS here -->
+              </div>
+              <div
+                class="form-grid bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"
+              >
+                <div>
+                  <span class="input-guide-label">Job Title / Designation</span>
+                  <input type="text" id="exp-role" placeholder="Role / Title" />
+                </div>
+                <div>
+                  <span class="input-guide-label"
+                    >Company / Corporation Name</span
+                  >
+                  <input type="text" id="exp-comp" placeholder="Company Name" />
+                </div>
+                <div>
+                  <span class="input-guide-label"
+                    >Employment Date Timeline Span</span
+                  >
+                  <input
+                    type="text"
+                    id="exp-date"
+                    placeholder="Timeline (e.g., 2020 - 2030)"
+                  />
+                </div>
+                <div>
+                  <span class="input-guide-label"
+                    >Summary of Contributions (Compact: 2 lines)</span
+                  >
+                  <textarea
+                    id="exp-desc"
+                    placeholder="Responsibilities / Metrics summary"
+                    rows="2"
+                  ></textarea>
+                </div>
+                <button
+                  class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-1.5 px-3 rounded text-xs transition cursor-pointer"
+                  onclick="addExperience()"
+                >
+                  <i class="fa-solid fa-plus"></i> Add Job entry
+                </button>
+              </div>
+            </div>
+
+            <!-- Academic degree achievements list -->
+            <div class="form-section">
+              <h3>
+                <i class="fa-solid fa-graduation-cap"></i> Academic Records
+              </h3>
+              <p class="text-[10px] text-sky-400 mb-2">
+                Configure education details (Limit: Max 3)
+              </p>
+              <div class="space-y-2 mb-3" id="cv-education-container">
+                <!-- Dynamic entries loaded via JS here -->
+              </div>
+              <div
+                class="form-grid bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"
+              >
+                <div>
+                  <span class="input-guide-label"
+                    >Graduation Degree / Course Spec</span
+                  >
+                  <input
+                    type="text"
+                    id="edu-degree"
+                    placeholder="Degree Path"
+                  />
+                </div>
+                <div>
+                  <span class="input-guide-label"
+                    >University / School name</span
+                  >
+                  <input type="text" id="edu-inst" placeholder="Institution" />
+                </div>
+                <div>
+                  <span class="input-guide-label"
+                    >Symmetric Academic Graduation Date</span
+                  >
+                  <input
+                    type="text"
+                    id="edu-date"
+                    placeholder="Graduation Timeline"
+                  />
+                </div>
+                <button
+                  class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-1.5 px-3 rounded text-xs transition cursor-pointer"
+                  onclick="addEducation()"
+                >
+                  <i class="fa-solid fa-plus"></i> Add Degree
+                </button>
+              </div>
+            </div>
+
+            <!-- Professional Reference Cards compiler -->
+            <div class="form-section">
+              <h3>
+                <i class="fa-solid fa-address-book"></i> Professional References
+              </h3>
+              <p class="text-[10px] text-sky-400 mb-2">
+                Configure reference contact cards (Limit: Max 2)
+              </p>
+              <div class="space-y-2 mb-3" id="cv-references-container">
+                <!-- Dynamic entries loaded via JS here -->
+              </div>
+              <div
+                class="form-grid bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"
+              >
+                <div>
+                  <span class="input-guide-label">Referee Full Name</span>
+                  <input
+                    type="text"
+                    id="ref-name"
+                    placeholder="e.g. Estelle Darcy"
+                  />
+                </div>
+                <div>
+                  <span class="input-guide-label"
+                    >Company Name / Designation Position</span
+                  >
+                  <input
+                    type="text"
+                    id="ref-relation"
+                    placeholder="e.g. Wardiere Inc. / CEO"
+                  />
+                </div>
+                <div>
+                  <span class="input-guide-label"
+                    >Contact Details (Phone / Email Address)</span
+                  >
+                  <input
+                    type="text"
+                    id="ref-contact"
+                    placeholder="e.g. Phone: +123-456-7890"
+                  />
+                </div>
+                <button
+                  class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-1.5 px-3 rounded text-xs transition cursor-pointer"
+                  onclick="addReference()"
+                >
+                  <i class="fa-solid fa-plus"></i> Add Reference card
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- =========================================================================
+               [SUB-SECTION: DYNAMIC FIELD COMPILER FOR MARRIAGE BIODATA ONLY]
+               ========================================================================= -->
+          <div id="form-marital-fields" class="space-y-4 hidden">
+            <!-- Personal specifications (Religion, clan/gothra, horoscope star, physical height) -->
+            <div class="form-section">
+              <h3><i class="fa-solid fa-ring"></i> Personal Specifications</h3>
+              <div class="form-grid">
+                <div>
+                  <span class="input-guide-label"
+                    >Religion and Specific Sect/Caste</span
+                  >
+                  <input
+                    type="text"
+                    id="b-religion"
+                    placeholder="Religion / Beliefs"
+                    value="Hindu / Brahmin"
+                    oninput="renderLivePreview()"
+                  />
+                </div>
+                <div>
+                  <span class="input-guide-label"
+                    >Gothra / Clan / Ancestor lineage name</span
+                  >
+                  <input
+                    type="text"
+                    id="b-gothra"
+                    placeholder="Gothra / Clan / Sect"
+                    value="Vashishta"
+                    oninput="renderLivePreview()"
+                  />
+                </div>
+                <div>
+                  <span class="input-guide-label"
+                    >Rashi, Star Sign, or Birth Horoscope Star details</span
+                  >
+                  <input
+                    type="text"
+                    id="b-horo"
+                    placeholder="Horoscope / Star Sign"
+                    value="Aries / Ashwini"
+                    oninput="renderLivePreview()"
+                  />
+                </div>
+                <div>
+                  <span class="input-guide-label"
+                    >Physical Height Measurements (e.g., 5ft 11in)</span
+                  >
+                  <input
+                    type="text"
+                    id="b-height"
+                    placeholder="Height (e.g., 5ft 11in)"
+                    value="5 Feet 11 Inches"
+                    oninput="renderLivePreview()"
+                  />
+                </div>
+                <div>
+                  <span class="input-guide-label">Exact Date of Birth</span>
+                  <input
+                    type="text"
+                    id="b-dob"
+                    placeholder="Date of Birth"
+                    value="12th April 1996"
+                    oninput="renderLivePreview()"
+                  />
+                </div>
+                <div>
+                  <span class="input-guide-label"
+                    >Geographical City and Country of Birth</span
+                  >
+                  <input
+                    type="text"
+                    id="b-pob"
+                    placeholder="Place of Birth"
+                    value="New Delhi, India"
+                    oninput="renderLivePreview()"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Family Kinship & Relatives Registry (Up to 6) -->
+            <div class="form-section">
+              <h3>
+                <i class="fa-solid fa-people-roof"></i> Family Section (Max 6)
+              </h3>
+              <div class="space-y-2 mb-3" id="marital-relatives-container">
+                <!-- Dynamic relative labels loaded via JS here -->
+              </div>
+              <div
+                class="form-grid bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"
+              >
+                <div>
+                  <span class="input-guide-label"
+                    >Family Member's Full Name</span
+                  >
+                  <input
+                    type="text"
+                    id="rel-name"
+                    placeholder="Relative's Name"
+                  />
+                </div>
+                <div>
+                  <span class="input-guide-label"
+                    >Relation Category (e.g. Father, Elder Brother)</span
+                  >
+                  <input
+                    type="text"
+                    id="rel-relation"
+                    placeholder="Relation (e.g., Father)"
+                  />
+                </div>
+                <div>
+                  <span class="input-guide-label"
+                    >Current Profession or Ancestral status</span
+                  >
+                  <input
+                    type="text"
+                    id="rel-designation"
+                    placeholder="Designation / Profession"
+                  />
+                </div>
+                <button
+                  class="bg-teal-600 hover:bg-teal-500 text-white font-bold py-1.5 px-3 rounded text-xs transition cursor-pointer"
+                  onclick="addRelative()"
+                >
+                  <i class="fa-solid fa-plus"></i> Add Family Member
+                </button>
+              </div>
+            </div>
+
+            <!-- Partner Preferences statement -->
+            <div class="form-section">
+              <h3><i class="fa-solid fa-heart"></i> Expected Partner</h3>
+              <div class="form-grid">
+                <div>
+                  <span class="input-guide-label"
+                    >Detail desired values, age/height range, or professional
+                    goals</span
+                  >
+                  <textarea
+                    id="b-expect"
+                    placeholder="Describe expected partner qualities..."
+                    rows="3"
+                    oninput="renderLivePreview()"
+                  >
+Seeking an educated, understanding partner with modern outlooks yet holding deep respect for traditional family values.</textarea
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="form-scroll-area">
-        <!-- Basic Common Identity Section -->
-        <div class="form-section">
-          <h3><i class="fa-solid fa-id-card"></i> Primary Identity</h3>
-          <div class="form-grid">
-            <input
-              type="text"
-              id="f-name"
-              placeholder="Full Name"
-              oninput="renderLivePreview()"
-            />
-            <input
-              type="text"
-              id="f-subtitle"
-              placeholder="Professional Title / Profile Subtitle"
-              oninput="renderLivePreview()"
-            />
-            <textarea
-              id="f-about"
-              placeholder="Personal Summary / Intro statement"
-              rows="3"
-              oninput="renderLivePreview()"
-            ></textarea>
-          </div>
-        </div>
-
-        <!-- Core Communication Channels -->
-        <div class="form-section">
-          <h3><i class="fa-solid fa-envelope"></i> Contact Channels</h3>
-          <div class="form-grid">
-            <input
-              type="text"
-              id="f-phone"
-              placeholder="Phone Number"
-              oninput="renderLivePreview()"
-            />
-            <input
-              type="text"
-              id="f-email"
-              placeholder="Email Address"
-              oninput="renderLivePreview()"
-            />
-            <input
-              type="text"
-              id="f-loc"
-              placeholder="Location"
-              oninput="renderLivePreview()"
-            />
-            <input
-              type="text"
-              id="f-web"
-              placeholder="Website URL"
-              oninput="renderLivePreview()"
-            />
-          </div>
-        </div>
-
-        <!-- Professional Fields -->
-        <div id="form-prof-fields" class="space-y-4">
-          <div class="form-section">
-            <h3><i class="fa-solid fa-briefcase"></i> Professional History</h3>
-            <p class="text-[10px] text-sky-400 mb-2">
-              Configure jobs/milestones (Limit: Max 3)
-            </p>
-            <div
-              class="space-y-2 mb-3 border-b border-slate-700 pb-3"
-              id="cv-experience-container"
-            >
-              <!-- Dynamic list of added roles -->
-            </div>
-            <div
-              class="form-grid bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"
-            >
-              <input type="text" id="exp-role" placeholder="Role / Title" />
-              <input type="text" id="exp-comp" placeholder="Company Name" />
-              <input
-                type="text"
-                id="exp-date"
-                placeholder="Timeline (e.g., 2022 - Present)"
-              />
-              <textarea
-                id="exp-desc"
-                placeholder="Responsibilities / Metrics summary"
-                rows="2"
-              ></textarea>
-              <button
-                class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-1.5 px-3 rounded text-xs transition"
-                onclick="addCvExperience()"
-              >
-                <i class="fa-solid fa-plus"></i> Add Experience Entry
-              </button>
-            </div>
-          </div>
-
-          <div class="form-section">
-            <h3><i class="fa-solid fa-graduation-cap"></i> Academic Records</h3>
-            <p class="text-[10px] text-sky-400 mb-2">
-              Configure academic steps (Limit: Max 3)
-            </p>
-            <div
-              class="space-y-2 mb-3 border-b border-slate-700 pb-3"
-              id="cv-education-container"
-            >
-              <!-- Dynamic academic steps list -->
-            </div>
-            <div
-              class="form-grid bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"
-            >
-              <input type="text" id="edu-degree" placeholder="Degree Path" />
-              <input type="text" id="edu-inst" placeholder="Institution" />
-              <input
-                type="text"
-                id="edu-date"
-                placeholder="Graduation Timeline"
-              />
-              <button
-                class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-1.5 px-3 rounded text-xs transition"
-                onclick="addCvEducation()"
-              >
-                <i class="fa-solid fa-plus"></i> Add Academic Record
-              </button>
-            </div>
-          </div>
-
-          <div class="form-section">
-            <h3><i class="fa-solid fa-tags"></i> Core Capability Matrix</h3>
-            <p class="text-[10px] text-sky-400 mb-2">
-              Configure core skills (Limit: Max 6)
-            </p>
-            <div class="flex flex-wrap gap-1.5 mb-3" id="cv-skills-container">
-              <!-- Dynamic skill pills -->
-            </div>
-            <div
-              class="flex gap-2 bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"
-            >
-              <input
-                type="text"
-                id="skill-input"
-                placeholder="e.g. Design, Systems"
-                class="flex-1"
-              />
-              <button
-                class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-1.5 px-3 rounded text-xs transition w-auto"
-                onclick="addCvSkill()"
-              >
-                <i class="fa-solid fa-plus"></i> Add
-              </button>
-            </div>
-          </div>
-
-          <div class="form-section">
-            <h3><i class="fa-solid fa-language"></i> Languages Registry</h3>
-            <p class="text-[10px] text-sky-400 mb-2">
-              Configure spoken languages (Limit: Max 4)
-            </p>
-            <div
-              class="flex flex-wrap gap-1.5 mb-3"
-              id="cv-languages-container"
-            >
-              <!-- Dynamic languages -->
-            </div>
-            <div
-              class="flex gap-2 bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"
-            >
-              <input
-                type="text"
-                id="language-input"
-                placeholder="e.g. English (Native)"
-                class="flex-1"
-              />
-              <button
-                class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-1.5 px-3 rounded text-xs transition w-auto"
-                onclick="addCvLanguage()"
-              >
-                <i class="fa-solid fa-plus"></i> Add
-              </button>
-            </div>
-          </div>
-
-          <div class="form-section">
-            <h3><i class="fa-solid fa-medal"></i> Extra-Curricular Pursuits</h3>
-            <p class="text-[10px] text-sky-400 mb-2">
-              Configure accomplishments (Limit: Max 3)
-            </p>
-            <div
-              class="space-y-2 mb-3 border-b border-slate-700 pb-3"
-              id="cv-curricular-container"
-            >
-              <!-- Dynamic curricular activities -->
-            </div>
-            <div
-              class="form-grid bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"
-            >
-              <input
-                type="text"
-                id="curricular-title"
-                placeholder="Activity Title / Honor"
-              />
-              <input
-                type="text"
-                id="curricular-desc"
-                placeholder="Details or organization"
-              />
-              <button
-                class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-1.5 px-3 rounded text-xs transition"
-                onclick="addCvCurricular()"
-              >
-                <i class="fa-solid fa-plus"></i> Add Activity
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Marital Fields (Dynamic additions) -->
-        <div id="form-marital-fields" class="space-y-4 hidden">
-          <!-- Section 1: Detailed Personal Information parameters -->
-          <div class="form-section">
-            <h3><i class="fa-solid fa-ring"></i> Personal Information</h3>
-            <div class="form-grid">
-              <input
-                type="text"
-                id="b-religion"
-                placeholder="Religion / Beliefs"
-                oninput="renderLivePreview()"
-              />
-              <input
-                type="text"
-                id="b-gothra"
-                placeholder="Gothra / Clan / Sect"
-                oninput="renderLivePreview()"
-              />
-              <input
-                type="text"
-                id="b-horo"
-                placeholder="Horoscope / Star Sign"
-                oninput="renderLivePreview()"
-              />
-              <input
-                type="text"
-                id="b-height"
-                placeholder="Height (e.g., 5ft 8in)"
-                oninput="renderLivePreview()"
-              />
-              <input
-                type="text"
-                id="b-dob"
-                placeholder="Date of Birth"
-                oninput="renderLivePreview()"
-              />
-              <input
-                type="text"
-                id="b-pob"
-                placeholder="Place of Birth"
-                oninput="renderLivePreview()"
-              />
-            </div>
-          </div>
-
-          <!-- Section 2: Professional Information with Add More Feature (Biodata context) -->
-          <div class="form-section">
-            <h3>
-              <i class="fa-solid fa-user-tie"></i> Professional Information
-            </h3>
-            <p class="text-[10px] text-sky-400 mb-2">
-              Configure jobs/milestones (Limit: Max 2)
-            </p>
-            <div
-              class="space-y-2 mb-3 border-b border-slate-700 pb-3"
-              id="marital-jobs-container"
-            >
-              <!-- Dynamic list of added jobs -->
-            </div>
-            <div
-              class="form-grid bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"
-            >
-              <input type="text" id="j-role" placeholder="Designation / Role" />
-              <input
-                type="text"
-                id="j-org"
-                placeholder="Organization / Income"
-              />
-              <input
-                type="text"
-                id="j-timeline"
-                placeholder="Timeline / Package"
-              />
-              <button
-                class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-1.5 px-3 rounded text-xs transition"
-                onclick="addMaritalJob()"
-              >
-                <i class="fa-solid fa-plus"></i> Add Professional Entry
-              </button>
-            </div>
-          </div>
-
-          <!-- Section 3: Family Kinship & Relatives Registry -->
-          <div class="form-section">
-            <h3>
-              <i class="fa-solid fa-people-roof"></i> Family & Relatives
-              Registry
-            </h3>
-            <p class="text-[10px] text-sky-400 mb-2">
-              Add family members or relatives (Limit: Max 6)
-            </p>
-            <div class="space-y-2 mb-3" id="marital-relatives-container">
-              <!-- Dynamic relatives nodes -->
-            </div>
-            <div
-              class="form-grid bg-slate-900/60 p-2.5 rounded-lg border border-slate-700"
-            >
-              <input type="text" id="r-name" placeholder="Relative's Name" />
-              <input
-                type="text"
-                id="r-relation"
-                placeholder="Relation (e.g., Father, Uncle, Brother)"
-              />
-              <input
-                type="text"
-                id="r-status"
-                placeholder="Designation / Profession / Status"
-              />
-              <button
-                class="bg-teal-600 hover:bg-teal-500 text-white font-bold py-1.5 px-3 rounded text-xs transition"
-                onclick="addRelative()"
-              >
-                <i class="fa-solid fa-user-plus"></i> Register Relative
-              </button>
-            </div>
-          </div>
-
-          <!-- Section 4: Expected Partner profile parameters -->
-          <div class="form-section">
-            <h3><i class="fa-solid fa-star"></i> Expected Partner Profile</h3>
-            <div class="form-grid">
-              <textarea
-                id="b-expect"
-                placeholder="Describe background, qualities and values..."
-                rows="3"
-                oninput="renderLivePreview()"
-              ></textarea>
-            </div>
-          </div>
-        </div>
+      <!-- =========================================================================
+           [PREMIUM STATIC SIDEBAR FOOTER: PRINT AND IMAGE DOWNLOAD CONTROLS]
+           ========================================================================= -->
+      <div
+        class="sidebar-footer-fixed p-4 bg-slate-950 border-t border-slate-800 flex gap-3 shrink-0 z-20 shadow-[0_-8px_20px_rgba(0,0,0,0.4)]"
+      >
+        <button
+          class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 px-3 rounded-lg text-xs transition flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-indigo-500/20 w-1/2"
+          onclick="exportPNG()"
+        >
+          <i class="fa-solid fa-download"></i> Save PNG Image
+        </button>
+        <button
+          class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-3 rounded-lg text-xs transition flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-emerald-500/20 w-1/2"
+          onclick="exportPDF()"
+        >
+          <i class="fa-solid fa-print"></i> Save PDF / Print
+        </button>
       </div>
     </div>
 
-    <!-- RIGHT PANEL: HIGH-FIDELITY LIVE CANVAS PREVIEW -->
+    <!-- =========================================================================
+         [RIGHT PANEL: INTERACTIVE PREVIEW VIEWPORT FRAME]
+         ========================================================================= -->
     <div class="preview-pane">
+      <!-- Interactive Zoom scaling overlay widget -->
       <div class="zoom-controls">
         <button onclick="zoomCanvas(0.05)" title="Zoom In">
           <i class="fa-solid fa-magnifying-glass-plus"></i>
@@ -575,19 +772,26 @@
         <button onclick="zoomCanvas(-0.05)" title="Zoom Out">
           <i class="fa-solid fa-magnifying-glass-minus"></i>
         </button>
-        <button onclick="resetZoom()" title="Fit Canvas">
+        <button onclick="resetZoom()" title="Reset Zoom">
           <i class="fa-solid fa-expand"></i>
         </button>
-        <span id="zoomDisplay">Zoom: 60%</span>
+        <span id="zoomDisplay" class="text-xs font-semibold">Zoom: 60%</span>
       </div>
 
+      <!-- Live Canvas Target context viewport container -->
       <div class="canvas-viewport">
         <div class="cv-canvas" id="canvasTarget">
-          <!-- Live canvas renders templates dynamically here -->
+          <!-- Live dynamic templates are rendered here instantly by JS compile pipeline -->
         </div>
       </div>
     </div>
 
-    <script src="app.js"></script>
+    <!-- Popup alert dialog tag -->
+    <div id="custom-alert-box">Action completed successfully!</div>
+
+    <!-- =========================================================================
+         [INTERACTIVE COMPILING LOGIC ENGINE - JAVASCRIPT SYSTEM]
+         ========================================================================= -->
+    <script src="app.js" defer></script>
   </body>
 </html>

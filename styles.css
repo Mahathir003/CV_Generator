@@ -1,18 +1,14 @@
-      /* === style.css === */
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      :root {
-        --primary-color: #0f172a;
+:root {
+        --primary-color: #0b192c;
         --secondary-color: #eab308;
-        --font-family: "Montserrat", sans-serif;
+        --font-cv: "Montserrat", sans-serif;
+        --font-biodata: "Playfair Display", serif;
+        --active-font: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
       }
 
+      /* Base layout framework: Creates a dual-pane sidebar/preview landscape */
       body {
-        font-family: "Montserrat", sans-serif;
+        font-family: var(--active-font), sans-serif;
         background-color: #0f172a;
         color: #f1f5f9;
         display: flex;
@@ -21,29 +17,36 @@
         width: 100vw;
       }
 
-      /* 2:3 Layout Ratio (40% Sidebar / 60% Preview) */
+      /* Left configuration panel styling */
       .sidebar-panel {
         width: 40vw;
-        min-width: 420px;
+        min-width: 430px;
         background: #1e293b;
         border-right: 1px solid #334155;
         display: flex;
         flex-direction: column;
         height: 100vh;
-        overflow-y: auto;
-        box-shadow: 8px 0 24px rgba(0, 0, 0, 0.25);
+        box-shadow: 8px 0 24px rgba(0, 0, 0, 0.3);
         z-index: 10;
+        overflow: hidden; 
       }
 
-      .sidebar-panel::-webkit-scrollbar {
-        width: 8px;
+      /* Independent internal scrolling context for form options */
+      .sidebar-scroll-content {
+        flex: 1;
+        overflow-y: auto;
       }
 
-      .sidebar-panel::-webkit-scrollbar-thumb {
+      .sidebar-scroll-content::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .sidebar-scroll-content::-webkit-scrollbar-thumb {
         background: #475569;
-        border-radius: 4px;
+        border-radius: 3px;
       }
 
+      /* Right-hand preview canvas wrapper styling */
       .preview-pane {
         width: 60vw;
         background: #0b1329;
@@ -56,26 +59,57 @@
         height: 100vh;
       }
 
-      .panel-header {
-        padding: 24px 24px 16px 24px;
-        background: #0f172a;
-        border-bottom: 1px solid #1e293b;
-        flex-shrink: 0;
+      /* Style for the select-template cards grid inside the sidebar */
+      .template-selector-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-top: 6px;
       }
 
-      .panel-header h1 {
-        font-size: 1.3rem;
+      .template-card-btn {
+        background: #0f172a;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        padding: 8px 10px;
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .template-card-btn:hover {
+        border-color: #38bdf8;
+        background: #1e293b;
+      }
+
+      .template-card-btn.active {
+        border-color: #38bdf8;
+        background: rgba(56, 189, 248, 0.15);
+        box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+      }
+
+      .template-card-btn .template-num {
+        font-size: 0.75rem;
         font-weight: 700;
         color: #ffffff;
-        margin-bottom: 2px;
-        letter-spacing: -0.5px;
       }
 
-      .panel-header p {
-        font-size: 0.75rem;
+      .template-card-btn .template-desc {
+        font-size: 0.65rem;
         color: #94a3b8;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
+      .template-card-btn.active .template-desc {
+        color: #38bdf8;
+      }
+
+      /* Control groups configuration (e.g., Font selection, layout selection, etc.) */
       .controls-container {
         padding: 20px;
         border-bottom: 1px solid #334155;
@@ -103,8 +137,6 @@
         gap: 6px;
       }
 
-      select,
-      input[type="file"],
       input[type="color"],
       button {
         padding: 10px 12px;
@@ -118,13 +150,7 @@
         transition: all 0.2s ease;
       }
 
-      select:focus,
-      input[type="file"]:focus {
-        outline: none;
-        border-color: #38bdf8;
-        box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
-      }
-
+      /* Symmetrical custom color pickers styling */
       .color-pickers-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -150,74 +176,7 @@
         background: transparent;
       }
 
-      .color-input-container span {
-        font-size: 0.75rem;
-        color: #cbd5e1;
-        font-weight: 500;
-      }
-
-      .template-selector-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-        margin-top: 4px;
-      }
-
-      .template-card-btn {
-        background: #1e293b;
-        border: 1px solid #475569;
-        border-radius: 8px;
-        padding: 8px 10px;
-        text-align: left;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-      }
-
-      .template-card-btn:hover {
-        border-color: #38bdf8;
-        background: #273549;
-      }
-
-      .template-card-btn.active {
-        border-color: #38bdf8;
-        background: #0284c7;
-        box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4);
-      }
-
-      .template-card-btn .template-num {
-        font-size: 0.75rem;
-        font-weight: 700;
-        color: #ffffff;
-      }
-
-      .template-card-btn .template-desc {
-        font-size: 0.65rem;
-        color: #94a3b8;
-        line-clamp: 1;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      .template-card-btn.active .template-desc {
-        color: #e0f2fe;
-      }
-
-      .btn-primary {
-        background: #0284c7;
-        color: white;
-        border: none;
-        font-weight: 600;
-        cursor: pointer;
-      }
-
-      .btn-primary:hover {
-        background: #0369a1;
-      }
-
+      /* Style rules for form input cards */
       .form-scroll-area {
         padding: 20px;
         display: flex;
@@ -245,10 +204,6 @@
         gap: 8px;
       }
 
-      .form-section h3 i {
-        color: #38bdf8;
-      }
-
       .form-grid {
         display: flex;
         flex-direction: column;
@@ -274,6 +229,7 @@
         border-color: #38bdf8;
       }
 
+      /* Viewport Zoom Overlay styling */
       .zoom-controls {
         position: absolute;
         top: 16px;
@@ -307,17 +263,12 @@
         color: #38bdf8;
       }
 
-      .zoom-controls span {
-        font-size: 0.75rem;
-        font-weight: 500;
-        color: #cbd5e1;
-      }
-
+      /* Viewport container allowing clean positioning of canvas frame */
       .canvas-viewport {
         flex: 1;
         width: 100%;
         overflow: auto;
-        padding: 40px 20px;
+        padding: 30px 15px;
         display: flex;
         justify-content: center;
         align-items: flex-start;
@@ -325,7 +276,9 @@
         scrollbar-color: #334155 #0b1329;
       }
 
-      /* Strict A4 Formats */
+      /* =========================================================================
+         [THE MASTER A4 PRINT CANVAS CONTEXT]
+         ========================================================================= */
       .cv-canvas {
         width: 210mm;
         height: 297mm;
@@ -344,9 +297,8 @@
         display: block;
       }
 
-      /* Standard line height definitions */
       .cv-canvas p {
-        line-height: 1.45 !important;
+        line-height: 1.4 !important;
       }
 
       .cv-canvas h1,
@@ -355,13 +307,14 @@
         line-height: 1.25 !important;
       }
 
+      /* Custom animated progress tracker styling */
       .bar-container {
         width: 100%;
         height: 5px;
-        background: rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.2);
         border-radius: 999px;
         overflow: hidden;
-        margin-top: 5px;
+        margin-top: 4px;
       }
 
       .bar-fill {
@@ -369,13 +322,48 @@
         border-radius: 999px;
       }
 
-      .purpose-btn-active {
-        background: #0284c7 !important;
-        color: white !important;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      /* Popup Alert Dialog style rules */
+      #custom-alert-box {
+        display: none;
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background-color: #10b981;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        z-index: 100;
+        animation: slideIn 0.3s ease-out;
       }
 
-      /* HIGH FIDELITY PRINT MEDIA OVERRIDES */
+      /* Form helper header tags styling */
+      .input-guide-label {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #94a3b8;
+        font-weight: 700;
+        margin-bottom: 4px;
+        display: block;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      /* =========================================================================
+         [NATIVE PHYSICAL A4 PRINT STYLES]
+         ========================================================================= */
       @media print {
         * {
           -webkit-print-color-adjust: exact !important;
@@ -393,14 +381,16 @@
           background-color: #ffffff !important;
         }
 
-        /* Hide all UI configuration elements */
+        /* Hide all workspace editor options and interactive grids */
         .sidebar-panel,
         .zoom-controls,
         .controls-container,
-        .panel-header {
+        .panel-header,
+        .sidebar-footer-fixed {
           display: none !important;
         }
 
+        /* Force only the single print-ready frame onto the page context */
         .preview-pane {
           width: 210mm !important;
           height: 297mm !important;
@@ -439,4 +429,3 @@
           display: block !important;
         }
       }
-      /* === End of style.css === */
